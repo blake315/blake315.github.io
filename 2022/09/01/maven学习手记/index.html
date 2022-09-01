@@ -16,17 +16,19 @@
   <meta name="author" content="Zeeway">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Maven——强力好用的Java项目管理工具 Maven在美国是一个口语化的词语，意思是专家，内行。也相当于汉语中的老炮儿，老师傅。正所谓老炮儿在手，管理无忧。 参考教程&#x2F;文档：  Maven教程网 学习使用Maven构建项目 Maven中文手册   Java项目管理工具的历史与发展对于Java项目管理工具，主要有三个主要工具，Ant、Maven以及Gradle（按照出现时间）。最开始的">
+    <meta name="description" content="Maven——强力好用的Java项目管理工具 Maven在美国是一个口语化的词语，意思是专家，内行。也相当于汉语中的老炮儿，老师傅。正所谓老炮儿在手，管理无忧。 我们要学的Maven，实际上是一个项目管理工具，可以对项目进行构建、依赖管理。经过发展，Maven已经不仅仅可以管理Java项目，也可以对例如Ruby，Scala等语言编写的项目进行项目管理。 参考教程&#x2F;文档：  Maven教程">
 <meta property="og:type" content="article">
 <meta property="og:title" content="maven学习手记">
 <meta property="og:url" content="https://blake315.github.io/2022/09/01/maven%E5%AD%A6%E4%B9%A0%E6%89%8B%E8%AE%B0/index.html">
 <meta property="og:site_name" content="Zeeway-blake的博客">
-<meta property="og:description" content="Maven——强力好用的Java项目管理工具 Maven在美国是一个口语化的词语，意思是专家，内行。也相当于汉语中的老炮儿，老师傅。正所谓老炮儿在手，管理无忧。 参考教程&#x2F;文档：  Maven教程网 学习使用Maven构建项目 Maven中文手册   Java项目管理工具的历史与发展对于Java项目管理工具，主要有三个主要工具，Ant、Maven以及Gradle（按照出现时间）。最开始的">
+<meta property="og:description" content="Maven——强力好用的Java项目管理工具 Maven在美国是一个口语化的词语，意思是专家，内行。也相当于汉语中的老炮儿，老师傅。正所谓老炮儿在手，管理无忧。 我们要学的Maven，实际上是一个项目管理工具，可以对项目进行构建、依赖管理。经过发展，Maven已经不仅仅可以管理Java项目，也可以对例如Ruby，Scala等语言编写的项目进行项目管理。 参考教程&#x2F;文档：  Maven教程">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://mvnbook.com/static/image/maven-core.png">
 <meta property="article:published_time" content="2022-09-01T10:41:05.000Z">
-<meta property="article:modified_time" content="2022-09-01T11:11:05.718Z">
+<meta property="article:modified_time" content="2022-09-01T15:14:21.645Z">
 <meta property="article:author" content="Zeeway">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://mvnbook.com/static/image/maven-core.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -237,7 +239,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          292 字
+          889 字
         
       </span>
     
@@ -248,7 +250,7 @@
         
         
         
-          3 分钟
+          8 分钟
         
       </span>
     
@@ -301,6 +303,7 @@
                 
                 <h1 id="Maven——强力好用的Java项目管理工具"><a href="#Maven——强力好用的Java项目管理工具" class="headerlink" title="Maven——强力好用的Java项目管理工具"></a>Maven——强力好用的Java项目管理工具</h1><blockquote>
 <p>Maven在美国是一个口语化的词语，意思是专家，内行。也相当于汉语中的老炮儿，老师傅。正所谓老炮儿在手，管理无忧。</p>
+<p>我们要学的Maven，实际上是一个项目管理工具，可以对项目进行构建、依赖管理。经过发展，Maven已经不仅仅可以管理Java项目，也可以对例如Ruby，Scala等语言编写的项目进行项目管理。</p>
 <p>参考教程&#x2F;文档：</p>
 <ul>
 <li><a target="_blank" rel="noopener" href="http://mvnbook.com/index.html">Maven教程网</a></li>
@@ -308,7 +311,20 @@
 <li><a target="_blank" rel="noopener" href="https://www.dba.cn/book/maven/">Maven中文手册</a></li>
 </ul>
 </blockquote>
-<h2 id="Java项目管理工具的历史与发展"><a href="#Java项目管理工具的历史与发展" class="headerlink" title="Java项目管理工具的历史与发展"></a>Java项目管理工具的历史与发展</h2><p>对于Java项目管理工具，主要有三个主要工具，Ant、Maven以及Gradle（按照出现时间）。最开始的Java项目管理工具是Ant，之后才出现了Maven，严格来说，Ant和Maven之间是兄弟关系，都是Apache基金会的项目。对于现行的企业Java开发来说，Maven是Java项目管理工具中的王者。</p>
+<hr>
+<h2 id="Maven简介"><a href="#Maven简介" class="headerlink" title="Maven简介"></a>Maven简介</h2><h3 id="Java项目管理工具的历史与发展"><a href="#Java项目管理工具的历史与发展" class="headerlink" title="Java项目管理工具的历史与发展"></a>Java项目管理工具的历史与发展</h3><p>对于Java项目管理工具，主要有三个主要工具，Ant、Maven以及Gradle（按照出现时间）。最开始的Java项目管理工具是Ant，之后才出现了Maven，严格来说，Ant和Maven之间是兄弟关系，都是Apache基金会的项目。对于现行的Java企业开发来说，Ant已经销声匿迹，而新出现的Gradle发展迅速，大有取代Maven地位的趋势，不过就目前来讲，Maven仍是Java项目管理工具中的王者。</p>
+<p>对于三个管理工具的简单接受和分析，百科及大量的博客已有介绍，我也不再赘述，这里推荐一下朋友Matty写的简单介绍。（<a target="_blank" rel="noopener" href="https://wuhang.xyz/fa714294.html">学习使用Maven构建项目</a>，1.2节）</p>
+<h3 id="Maven的组成"><a href="#Maven的组成" class="headerlink" title="Maven的组成"></a>Maven的组成</h3><blockquote>
+<p>Maven是一个项目管理工具，它包含了：项目对象模型 (POM，Project Object Model)，项目生命周期(Project Lifecycle)，依赖管理系统(Dependency Management System)和各种插件。插件主要用来实现生命周期各个阶段(phase)的目标(goal)。Maven的组成如下所示：</p>
+<p><img src="http://mvnbook.com/static/image/maven-core.png" srcset="/img/loading.gif" lazyload alt="概念模型"></p>
+<p>不过，上述介绍对于完全没有 Maven 实践经验的人来说，看了等于没看，并没有用处。只有当读者通读本站内容之后，反过头再看，才能豁然开朗。(<a target="_blank" rel="noopener" href="http://mvnbook.com/index.html">Maven教程网</a>)</p>
+</blockquote>
+<hr>
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><p>学习Maven的准备工作分为两个部分，官网下载zip包并解压，配置环境变量。这里的具体步骤参考<a target="_blank" rel="noopener" href="http://mvnbook.com/maven-download.html">Maven下载与安装</a></p>
+<blockquote>
+<p>自己报错：MAVEN_OPTS设置异常导致报错： could not create the JAVA  virtual machine</p>
+</blockquote>
+<hr>
 
                 
               </div>
@@ -373,8 +389,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/09/01/java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%9A%84%E4%B8%89%E7%A7%8D%E5%AE%9E%E7%8E%B0%E6%96%B9%E6%B3%95/" title="Java多线程详解">
-                        <span class="hidden-mobile">Java多线程详解</span>
+                      <a href="/2022/09/01/Lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/" title="Lambda表达式的进化之路">
+                        <span class="hidden-mobile">Lambda表达式的进化之路</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
