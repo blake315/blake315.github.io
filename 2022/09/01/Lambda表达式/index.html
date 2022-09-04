@@ -24,8 +24,9 @@
 <meta property="og:description" content="Lambda表达式的进化之路为什么要使用Lambda表达式 可以简洁代码，提高代码的可读性 可以避免匿名内部类定义过多导致逻辑紊乱 在原先实现接口抽象方法的时候，需要通过定义一个实现接口的外部类来实现，后面变为定义内部静态类，然后变为用局部内部类实现，再后面变成了定义匿名内部类来实现，最后的最后，为了代码的更加简洁，推出了Lambda表达式，最终实现了用一行代码完成之前多行代码的效果  Lambd">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-08-31T16:00:00.000Z">
-<meta property="article:modified_time" content="2022-09-01T07:47:42.608Z">
+<meta property="article:modified_time" content="2022-09-01T15:39:12.397Z">
 <meta property="article:author" content="Zeeway">
+<meta property="article:tag" content="Java">
 <meta name="twitter:card" content="summary_large_image">
   
   
@@ -70,7 +71,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"blake315.github.io","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"touch","icon":"§"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+    var CONFIG = {"hostname":"blake315.github.io","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"touch","icon":"§"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -129,18 +130,6 @@
               <a class="nav-link" href="/archives/">
                 <i class="iconfont icon-archive-fill"></i>
                 归档
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/categories/">
-                <i class="iconfont icon-category-fill"></i>
-                分类
               </a>
             </li>
           
@@ -348,6 +337,13 @@
               <div class="post-metas my-3">
   
   
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Java/">#Java</a>
+      
+    </div>
+  
 </div>
 
 
@@ -399,9 +395,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/09/01/maven%E5%AD%A6%E4%B9%A0%E6%89%8B%E8%AE%B0/" title="maven学习手记">
+                      <a href="/2022/09/01/java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%9A%84%E4%B8%89%E7%A7%8D%E5%AE%9E%E7%8E%B0%E6%96%B9%E6%B3%95/" title="Java多线程详解">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">maven学习手记</span>
+                        <span class="hidden-mobile">Java多线程详解</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -409,8 +405,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/09/01/java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%9A%84%E4%B8%89%E7%A7%8D%E5%AE%9E%E7%8E%B0%E6%96%B9%E6%B3%95/" title="Java多线程详解">
-                        <span class="hidden-mobile">Java多线程详解</span>
+                      <a href="/2022/09/01/%E7%BA%BF%E7%A8%8B%E7%9A%84%E7%8A%B6%E6%80%81/" title="线程的生命历程">
+                        <span class="hidden-mobile">线程的生命历程</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
