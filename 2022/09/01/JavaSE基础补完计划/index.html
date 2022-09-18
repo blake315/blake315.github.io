@@ -26,7 +26,7 @@
 <meta property="og:image" content="https://blake315.github.io/%5Cimg%5C%E5%8C%85%E8%A3%85%E7%B1%BB1.jpg">
 <meta property="og:image" content="https://blake315.github.io/%5Cimg%5C%E5%BC%82%E5%B8%B8%E7%B1%BB%E7%BB%93%E6%9E%84.jpg">
 <meta property="article:published_time" content="2022-09-01T15:32:33.000Z">
-<meta property="article:modified_time" content="2022-09-06T06:24:36.641Z">
+<meta property="article:modified_time" content="2022-09-18T12:53:06.143Z">
 <meta property="article:author" content="Zeeway">
 <meta property="article:tag" content="Java">
 <meta name="twitter:card" content="summary_large_image">
@@ -229,7 +229,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.2k 字
+          5.4k 字
         
       </span>
     
@@ -240,7 +240,7 @@
         
         
         
-          19 分钟
+          45 分钟
         
       </span>
     
@@ -357,6 +357,65 @@
 </ul>
 </blockquote>
 <h3 id="异常分类"><a href="#异常分类" class="headerlink" title="异常分类"></a>异常分类</h3><p><img src="/%5Cimg%5C%E5%BC%82%E5%B8%B8%E7%B1%BB%E7%BB%93%E6%9E%84.jpg" srcset="/img/loading.gif" lazyload alt="异常层次结构体系"></p>
+<p>从上图其实可以很清晰的看出，Java中的异常其实也是一个类，继承自Throwable类，分为两种：Error类和Exception，其中Exception类还有IOException和RuntimeException两个子类。当然，如果现有的类不足以满足用户的需求，同样可以自己编写需要的子类。</p>
+<ul>
+<li>Error类描述的是Java运行是系统的内部错误和资源耗尽错误。如果出现了这样的内部错误，程序除了通告给用户同时尽力安全地终止程序外，其他的也无能为力。这种情况在实际开发很少出现。</li>
+<li>Exception类是在开发中需要重点关注的部分。一般来说，由程序错误导致的异常术语RuntimeException；如果程序本身没有问题，不过由于 I&#x2F;O 错误这类问题导致的异常属于IOException。<ul>
+<li>RuntimeException的异常还包括：错误的类型转换，数组访问越界，访问空指针</li>
+<li>IOException的异常还包括：试图的文件尾部后面读取数据，试图打开一个错误格式的URL，试图根据给定的字符串查找Class对象，但是字符串表示的类并不存在</li>
+</ul>
+</li>
+</ul>
+<h3 id="异常的抛出，捕获及自定义"><a href="#异常的抛出，捕获及自定义" class="headerlink" title="异常的抛出，捕获及自定义"></a>异常的抛出，捕获及自定义</h3><h4 id="抛出异常"><a href="#抛出异常" class="headerlink" title="抛出异常"></a>抛出异常</h4><p>如果调用方法时因为传入错误的参数，进而导致程序无法正常运行，此时应该手动抛出一个异常来终止程序，然后报告上一级方法执行出现问题。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs Java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>        <span class="hljs-keyword">try</span> &#123;<br>            test(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>);<br>        &#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;   <span class="hljs-comment">//捕获方法中会出现的异常</span><br>            e.printStackTrace();<br>        &#125;<br>    &#125;<br>        <span class="hljs-comment">//声明抛出的异常类型</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-type">int</span> <span class="hljs-title function_">test</span><span class="hljs-params">(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b)</span> <span class="hljs-keyword">throws</span> Exception &#123;  <br>        <span class="hljs-keyword">if</span>(b == <span class="hljs-number">0</span>) <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Exception</span>(<span class="hljs-string">&quot;0不能做除数！&quot;</span>);  <span class="hljs-comment">//创建异常对象并抛出异常</span><br>        <span class="hljs-keyword">return</span> a/b;  <span class="hljs-comment">//抛出异常会终止代码运行</span><br>    &#125;<br></code></pre></td></tr></table></figure>
+
+<p>如果调用编译时异常的方法，但是依然不想去处理，可以同样的在方法上声明 throws 来继续交给上一级处理</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs Java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> Exception &#123;  <span class="hljs-comment">//出现异常就再往上抛，而不是在此方法内处理</span><br>  test(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>);<br>&#125;<br><br><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-type">int</span> <span class="hljs-title function_">test</span><span class="hljs-params">(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b)</span> <span class="hljs-keyword">throws</span> Exception &#123;  <span class="hljs-comment">//声明抛出的异常类型</span><br>  <span class="hljs-keyword">if</span>(b == <span class="hljs-number">0</span>) <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Exception</span>(<span class="hljs-string">&quot;0不能做除数！&quot;</span>);  <span class="hljs-comment">//创建异常对象并抛出异常      </span><br>  <span class="hljs-keyword">return</span> a/b;  <br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>出现类似以上代码的情况，连main方法都声明抛出异常时，这时出现的异常就会交给JVM处理，JVM会直接终止程序并在控制台打印栈追踪信息（这也是默认的处理方法）</p>
+<h4 id="捕获异常"><a href="#捕获异常" class="headerlink" title="捕获异常"></a>捕获异常</h4><p>抛出一个异常十分容易，只要将它抛出就行了。不过，一些代码必须捕获异常。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">try</span>&#123;<br>    some code...<br>&#125;<span class="hljs-keyword">catch</span>(Exception e)&#123;<br>    some code...<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>try&#x2F;catch语句是捕获一个异常必须设置的。<strong>如果try代码块中抛出了一个在catch子句中说明的异常，那么，首先程序会跳过try代码块中的其余代码，执行catch中的处理器代码。如果没有出现任何异常，则不会执行catch中的代码。如果出现没有声明的异常类型，那么程序就会立刻退出。</strong></p>
+<blockquote>
+<p>编译器严格执行throws说明符，如果调用一个抛出已检查异常（非派生于Error类和RuntimeException类的异常）的方法，就必须对它进行处理，或者将其传递出去（即抛出）。</p>
+<p>通常，应捕获那些知道如何处理的异常，传递那些不知道怎么处理的异常。如果想将异常传出去，就必须在方法的首部添加一个throws说明符，以便告知调用者这个方法可能会抛出异常。</p>
+<p>阅读Java API文档，以便知道每个方法可能会抛出的异常，然后决定是自己处理，还是添加到throws列表里。对后一种，不必犹豫，将异常直接交给能够胜任的处理器进行处理会比压制对它的处理更好。</p>
+<p>​																		——《Java核心技术卷》</p>
+</blockquote>
+<p><strong>对于捕获多个异常来说，就是在try&#x2F;catch语句基础上，再多加入声明不同异常类型的catch语句。</strong></p>
+<p>此外，还可以在catch语句中再抛出一个异常，这样做的目的一般是改变异常的类型。</p>
+<h4 id="自定义异常"><a href="#自定义异常" class="headerlink" title="自定义异常"></a>自定义异常</h4><p>异常的自定义非常简单，只要继承部分的知识掌握的足够，自定义异常的编写更多是对父类方法的重写。</p>
+<hr>
+<h3 id="Java中的断言，日志和调试"><a href="#Java中的断言，日志和调试" class="headerlink" title="Java中的断言，日志和调试"></a>Java中的断言，日志和调试</h3><h4 id="断言机制"><a href="#断言机制" class="headerlink" title="断言机制"></a>断言机制</h4><p>在程序设计中，代码运行测试是必不可少的，这就要求在程序中插入测试代码。一般的测试代码在测试完成后不会自动删除，大量的测试代码会导致程序的运行变慢。</p>
+<p>断言机制就是允许在测试时向代码插入检查语句，到代码发布时，这些插入的语句将会被自动的移走。Java中引入 assert 关键字来使用断言。</p>
+<p>不过，在现在的开发中，断言并不推荐使用。详见：<a target="_blank" rel="noopener" href="https://developer.aliyun.com/article/409118">Java陷阱之assert关键字</a></p>
+<hr>
+<h2 id="泛型程序设计"><a href="#泛型程序设计" class="headerlink" title="泛型程序设计"></a>泛型程序设计</h2><h3 id="泛型的概念"><a href="#泛型的概念" class="headerlink" title="泛型的概念"></a>泛型的概念</h3><p>泛型，其实就是为了编写的代码可以被不同<strong>类型对象</strong>所使用。</p>
+<p>在没使用泛型之前，代码可能是这样写的</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">List</span>&#123;<br>    <span class="hljs-keyword">private</span> String[] paraList; <br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">get</span><span class="hljs-params">(<span class="hljs-type">int</span> i)</span>&#123;...&#125;;<br>	<span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">add</span><span class="hljs-params">(String para)</span>&#123;...&#125;;<br>	.....<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>对于这样一个List类，在使用时只能添加String类型的数据，如果要使用其他类型，好像得重写一下。有人可能会想到Object类，它是所有类的超类，修改如下</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs Java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">List</span>&#123;<br>    <span class="hljs-keyword">private</span> Object[] paraList; <br>    <span class="hljs-keyword">public</span> Object <span class="hljs-title function_">get</span><span class="hljs-params">(<span class="hljs-type">int</span> i)</span>&#123;...&#125;;<br>	<span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">add</span><span class="hljs-params">(Object para)</span>&#123;...&#125;;<br>	.....<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>可是，这里一样会出现两个问题：</p>
+<ul>
+<li><p>获取一个值时必须进行强制类型转换</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs Java"><span class="hljs-type">String</span> <span class="hljs-variable">s</span> <span class="hljs-operator">=</span> (String)list.get(<span class="hljs-number">0</span>);<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>可以在数组中添加任何类的对象，容易导致一些无法预料的错误。</p>
+</li>
+</ul>
+<p>基于以上原因，泛型的作用就凸显出来了。相同代码，完全可以这样编写（这里的T只能是类，不可以使用基本数据类型，可以使用包装类）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs Java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">List</span>&lt;T&gt;&#123;<br>   <span class="hljs-keyword">private</span> T[] paraList; <br>    <span class="hljs-keyword">public</span> T <span class="hljs-title function_">get</span><span class="hljs-params">(<span class="hljs-type">int</span> i)</span>&#123;...&#125;;<br>	<span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">add</span><span class="hljs-params">(T para)</span>&#123;...&#125;;<br>	.....<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="定义泛型类-x2F-方法-x2F-接口"><a href="#定义泛型类-x2F-方法-x2F-接口" class="headerlink" title="定义泛型类&#x2F;方法&#x2F;接口"></a>定义泛型类&#x2F;方法&#x2F;接口</h3><p>泛型类就是具有一个或者多个类型变量的类。它的定义较为简单，参考上面的例子，使用一对尖括号（&lt;&gt;）将类型变量 T 括起来放在类名的后面。如果有多个，还可以使用K，V，U，S等，中间使用逗号隔开。</p>
+<hr>
+<h2 id="集合类和集合接口"><a href="#集合类和集合接口" class="headerlink" title="集合类和集合接口"></a>集合类和集合接口</h2><p>Java的类库中有这么一些类，可以帮助我没在程序设计中实现传统的数据结构，比如链表，堆栈，队列，散列表等等。数据结构是程序设计中必学的课程，也有许多相关的书籍介绍和讲解使用方法，此处不再赘述。</p>
+<p>此外，在学习数据结构时，一般会穿插讲解算法，对于一般人来说，算法只需要了解几种常见的排序算法和查找算法即可，在了解的基础上懂得如何使用，以及理解实现过程便可，并不需要在深入了解算法。</p>
+<hr>
+<h2 id="Java中的多线程"><a href="#Java中的多线程" class="headerlink" title="Java中的多线程"></a>Java中的多线程</h2><p>多线程基础介绍部分，笔者之前就有写过博客，详见：<a href="https://blake315.github.io/2022/09/01/java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%9A%84%E4%B8%89%E7%A7%8D%E5%AE%9E%E7%8E%B0%E6%96%B9%E6%B3%95/">Java多线程</a></p>
+<p>内容有错误之处，欢迎指出。</p>
 
                 
               </div>
@@ -448,6 +507,28 @@
             
   <article id="comments" lazyload>
     
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.4.17/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"6n16lNU8XJ9CyuDd0cCfVqWr-gzGzoHsz","appKey":"OtK0hzFEFK6oqvh7QbaWoK8h","path":"window.location.pathname","placeholder":null,"avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
 
   </article>
 
